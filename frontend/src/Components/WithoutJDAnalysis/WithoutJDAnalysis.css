@@ -1,0 +1,146 @@
+.main-container{
+    box-sizing:border-box;
+    padding:10px 20px;
+    min-height:100vh;
+    background-color: #2b2f36;
+}
+
+.withoutJDBody{
+
+    width:80%;
+    max-width:1000px;
+    margin:0 auto;
+    padding:2rem;
+    border-radius:20px;
+    
+
+   font-size: 0.1rem;
+}
+.analysis-header {
+    text-align: center;
+    padding: 5px 20px 0px 20px;
+}
+
+.analysis-title {
+    font-size: 3rem;
+    font-weight : 700;
+    color:  #a78bfa;
+    margin-bottom: 0.7rem;
+}
+
+.analysis-subtitle {
+    font-size: 1.2rem;
+    color: #64748b;
+    margin-bottom: 2rem;
+}
+.row1{
+    align-items: center;
+    display: grid;
+    grid-template-columns: 0.5fr 1fr;
+    margin-bottom: 2rem;
+
+}
+
+.withoutjd-page .progress-item{
+    max-width:500px;
+}
+
+.pb{
+    color: whitesmoke;
+        background:rgba(255,255,255,0.10);
+        padding: 20px;
+        border-radius: 10px;
+
+}
+
+.ats-score-wrapper{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content: center;
+    gap:0.5rem;
+}
+
+.stats-grid{
+    flex:1;
+    display:grid;
+    grid-template-columns: repeat(auto-fit,minmax(160px,1fr));
+    gap:1.2rem;
+    box-sizing: border-box;
+}
+
+.stats-card{
+    box-sizing: border-box;
+    padding : 0px 10px;
+}
+
+
+
+.anotherdiv {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0 40px 0;
+}
+
+.another {
+    padding: 14px 32px;
+    background: #6366f1;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+
+
+.row2 , .row3, .row4, .row6{
+
+
+    width:100%;
+    margin-bottom: 2rem;
+}
+
+
+
+.row5{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1.5rem;
+    align-items:start;
+    align-items: start;
+}
+
+.suggestions,
+.technical-analysis{
+
+    width:100%;
+}
+
+.techanalysisfont{
+    font-size: 2rem;
+    margin-bottom: 0.7rem;
+    font-weight: 500;
+}
+
+@media(max-width:740px){
+
+    .row1{
+        grid-template-columns:1fr;
+        gap:2rem;
+    }
+
+    .ats-score-wrapper{
+        flex-direction:row;
+        justify-content:center;
+        align-items:center;
+        width:100%;
+    }
+
+    .row5{
+
+        grid-template-columns:1fr;
+    }   
+
+}

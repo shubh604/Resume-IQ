@@ -1,0 +1,42 @@
+
+.tag-wrapper{
+    margin-top:1.5rem;
+    background: rgba(255,255,255,0.10);
+    padding: 20px;
+    border-radius: 10px;
+    color: whitesmoke;
+}
+
+.title{
+    font-size:1.6rem;
+    margin-bottom:0.7rem;
+    font-weight: 500;
+}
+
+.tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.tag{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:6px;
+
+    padding:14px 21px;
+
+    border-radius:999px;
+
+    width:fit-content;
+
+    max-width:100%;
+
+    background: rgba(255,255,255,0.10);
+    font-size:1rem;
+
+    font-weight:400;
+}
