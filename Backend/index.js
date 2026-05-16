@@ -1,13 +1,16 @@
 const express = require("express");
 const app = express();
-
 require("dotenv").config();
-
 app.use(express.json());
+const cors = require("cors");
+app.use(
+    cors({origin: "http://localhost:3000"})
+);
 
 const uploadRoute = require("./routes/route");
 
 app.use("/api/resume", uploadRoute);
+
 app.use((err, req, res, next) => {
 
     return res.json({

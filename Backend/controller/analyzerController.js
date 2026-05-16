@@ -28,7 +28,7 @@ async function analyzeResumeController(req, res) {
                 You are an expert ATS Resume Analyzer.
                 Compare the following resume with the provided Job Description.
                 Respond ONLY in valid JSON format, no extra text, no markdown.
-
+                Important: Every array must have at least 2-4 items. Do not return any empty arrays.
                 {
                 "matchScore": (number 0-100),
                 "atsScore": (number 0-100),
@@ -37,7 +37,13 @@ async function analyzeResumeController(req, res) {
                 "missingKeywords": (array of strings),
                 "strengths": (array of strings),
                 "suggestions": (array of strings),
-                "bestRoles": (array of strings)
+                "bestRoles": (array of strings),
+                "scoreBreakdown": {
+                "jobMatch": (number 0-100),
+                "atsCompatibility": (number 0-100),
+                "skillCoverage": (number 0-100),
+                "keywordMatch": (number 0-100)
+                }
                 }
 
                 Job Description:
@@ -54,15 +60,22 @@ async function analyzeResumeController(req, res) {
             You are an expert ATS Resume Analyzer.
             Analyze the following resume carefully.
             Respond ONLY in valid JSON format, no extra text, no markdown.
-
+            Important: Every array must have at least 2-4 items. Do not return any empty arrays.
             {
             "atsScore": (number 0-100),
             "strengths": (array of strings),
             "missingSkills": (array of strings),
             "suggestions": (array of strings),
             "bestRoles": (array of strings),
-            "technicalAnalysis": (array of strings),
-            "formattingFeedback": (array of strings)
+            "formattingFeedback": (array of strings),
+            "keywordMatch": (number 0-100),
+            "technicalAnalysis": {
+            "frontend": (number 0-100),
+            "backend": (number 0-100),
+            "devopsCloud": (number 0-100),
+            "database": (number 0-100),
+            "testingQA": (number 0-100)
+            }
             }
 
             Resume Content:
