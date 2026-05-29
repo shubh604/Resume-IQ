@@ -6,8 +6,7 @@ ResumeIQ helps job seekers evaluate their resumes through ATS-style scoring, AI-
 
 ## 🚀 Live Demo
 
-- Frontend: [Live Demo](https://resume-iq-liart.vercel.app/)
-- Backend: [API](https://resume-iq-1-wfn2.onrender.com)
+[Live Demo](https://resume-iq-liart.vercel.app/)
 
 ---
 
