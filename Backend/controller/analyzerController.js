@@ -3,9 +3,9 @@ const PdfParse = require("pdf-parse");
 const model = require("../config/gemini");
 
 async function analyzeResumeController(req, res) {
-
-    try{
-        const pdf = req.file;
+    const pdf = req.file;
+    try {
+        console.log("controller called!");
         if (!pdf) {
             return res.status(400).json({
                 success: false,
@@ -16,28 +16,32 @@ async function analyzeResumeController(req, res) {
         const pdfData = await PdfParse(raw_buffered_data);
         const pdfText = pdfData.text;
 
+        if(!pdfText || pdfText.trim().length < 50){
+            return res.status(400).json({
+                success: false,
+                message: "PDF appears to be empty or unreadable"
+            });
+        }
+
         const { jobDescription } = req.body;
- 
-        console.log(model);
         let prompt = "";
 
-        // if job description exists
         if (jobDescription && jobDescription.trim() !== "") {
-
             prompt = `
                 You are an expert ATS Resume Analyzer.
-                Compare the following resume with the provided Job Description.
-                Respond ONLY in valid JSON format, no extra text, no markdown.
-                Important: Every array must have at least 2-4 items. Do not return any empty arrays.
+                First, check if the provided document is actually a resume or CV.
+                If it is NOT a resume, respond ONLY with this exact JSON: {"error": "not_a_resume"}
+                If it IS a resume, compare it with the provided Job Description and respond ONLY in valid JSON format, no extra text, no markdown.
+                Important: Every array must have minimum 5 items and maximum 12 items. Do not return any empty arrays.
                 {
                 "matchScore": (number 0-100),
                 "atsScore": (number 0-100),
-                "matchedSkills": (array of strings),
-                "missingSkills": (array of strings),
-                "missingKeywords": (array of strings),
-                "strengths": (array of strings),
-                "suggestions": (array of strings),
-                "bestRoles": (array of strings),
+                "matchedSkills": (array of 5-12 strings),
+                "missingSkills": (array of 5-12 strings),
+                "missingKeywords": (array of 5-12 strings),
+                "strengths": (array of 5-12 strings),
+                "suggestions": (array of 5-12 strings),
+                "bestRoles": (array of 5-8 strings),
                 "scoreBreakdown": {
                 "jobMatch": (number 0-100),
                 "atsCompatibility": (number 0-100),
@@ -45,65 +49,91 @@ async function analyzeResumeController(req, res) {
                 "keywordMatch": (number 0-100)
                 }
                 }
-
                 Job Description:
                 ${jobDescription}
-
                 Resume Content:
                 ${pdfText}
-                `;
-        }
-        // if no job description
-        else {
-
+            `;
+        } else {
             prompt = `
-            You are an expert ATS Resume Analyzer.
-            Analyze the following resume carefully.
-            Respond ONLY in valid JSON format, no extra text, no markdown.
-            Important: Every array must have at least 2-4 items. Do not return any empty arrays.
-            {
-            "atsScore": (number 0-100),
-            "strengths": (array of strings),
-            "missingSkills": (array of strings),
-            "suggestions": (array of strings),
-            "bestRoles": (array of strings),
-            "formattingFeedback": (array of strings),
-            "keywordMatch": (number 0-100),
-            "technicalAnalysis": {
-            "frontend": (number 0-100),
-            "backend": (number 0-100),
-            "devopsCloud": (number 0-100),
-            "database": (number 0-100),
-            "testingQA": (number 0-100)
-            }
-            }
-
-            Resume Content:
-            ${pdfText}
+                You are an expert ATS Resume Analyzer.
+                First, check if the provided document is actually a resume or CV.
+                If it is NOT a resume, respond ONLY with this exact JSON: {"error": "not_a_resume"}
+                If it IS a resume, analyze it carefully and respond ONLY in valid JSON format, no extra text, no markdown.
+                Important: Every array must have minimum 5 items and maximum 12 items. Do not return any empty arrays.
+                {
+                "atsScore": (number 0-100),
+                "strengths": (array of 5-12 strings),
+                "missingSkills": (array of 5-12 strings),
+                "suggestions": (array of 5-12 strings),
+                "bestRoles": (array of 5-8 strings),
+                "formattingFeedback": (array of 5-12 strings),
+                "keywordMatch": (number 0-100),
+                "technicalAnalysis": {
+                "frontend": (number 0-100),
+                "backend": (number 0-100),
+                "devopsCloud": (number 0-100),
+                "database": (number 0-100),
+                "testingQA": (number 0-100)
+                }
+                }
+                Resume Content:
+                ${pdfText}
             `;
         }
 
         const result = await model.generateContent(prompt);
         const rawText = result.response.text();
-
-        fs.unlinkSync(pdf.path);
-
         const cleaned = rawText.replace(/```json|```/g, "").trim();
         const parsedResult = JSON.parse(cleaned);
 
-        res.json({
+        if(parsedResult.error === "not_a_resume"){
+            return res.status(400).json({
+                success: false,
+                message: "Uploaded PDF does not appear to be a resume"
+            });
+        }
+
+        res.status(200).json({
             success: true,
+            message: "Analysis Successful",
             data: parsedResult
         });
     }
     catch(error){
-        console.log(error);
-        res.json({
-            success:false,
-            message:"Error analyzing resume"
-        })
+        console.log("error:", error);
+        if(error.status === 503){
+            res.status(503).json({
+                success: false,
+                message: "AI service is busy. Please try again in a moment"
+            });}
+        else if(error.status === 429){
+            res.status(429).json({
+                success: false,
+                message: "Too many requests. Please try again after some time"
+            });
+        } else if(error.message?.includes("Invalid PDF") || error.message?.includes("PDF")){
+            res.status(400).json({
+                success: false,
+                message: "Invalid or corrupted PDF file"
+            });
+        } else if(error instanceof SyntaxError){
+            res.status(500).json({
+                success: false,
+                message: "Failed to parse AI response. Please try again"
+            });
+        } else {
+            res.status(500).json({
+                success: false,
+                message: "Error analyzing resume. Please try again"
+            });
+        }
     }
-
+    finally {
+        if (pdf && fs.existsSync(pdf.path)) {
+            fs.unlinkSync(pdf.path);
+        }
+    }
 }
 
 module.exports = analyzeResumeController;

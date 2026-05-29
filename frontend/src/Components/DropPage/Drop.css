@@ -1,248 +1,226 @@
-.drop-page{
-
-
-    background-color: #2b2f36;
-
+*{
+    margin:0;
+    padding:0;
     box-sizing:border-box;
-
+}
+body{
+    overflow-x:hidden;
+}
+.drop-page{
+    min-height:100vh;
+    background-color:#2b2f36;
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
-
-    padding:40px 20px;
-    overflow-y: auto;
-    height: 100vh;
+    padding:24px 18px;
 }
-
 .main-heading{
-    font-size:3.8rem;
+    font-size:3.2rem;
     font-weight:700;
-
-     color: #a78bfa;
-
-    margin-bottom:14px;
-
+    color:#a78bfa;
+    margin-bottom:8px;
     text-align:center;
-
-}
-textarea{
-    width:100%;
-    max-width:100%;
-    display: block;
 }
 .sub-heading{
-    font-size:1.4rem;
-
+    font-size:1.25rem;
     color:whitesmoke;
-
-    margin-bottom:45px;
-
+    margin-bottom:18px;
     text-align:center;
-
-    line-height:1.6;
+    line-height:1.5;
 }
-
 .hero-text{
     color:white;
-
-
-    font-size:1.2rem;
-
+    font-size:1rem;
     font-weight:500;
-    font-style: italic;
+    font-style:italic;
+    text-align:center;
+    max-width:850px;
+    margin-bottom:20px;
+    line-height:1.5;
 }
-
 .imageDiv{
-    width:min(1100px,100%);
-
-    min-height:240px;
-    margin-top: 20px;
-    border:2px dashed white;
-    border-radius:14px;
-
-    background: rgba(255,255,255,0.10);
-
+    width:min(1000px,100%);
+    min-height:210px;
+    border:2px dashed #e8f1f2;
+    border-radius:16px;
+    background-color:rgba(255,255,255,0.05);
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
-
-    gap:1.2rem;
-
-    padding:25px;
-
-    margin-bottom:28px;
-
-    box-sizing:border-box;
+    gap:0.9rem;
+    padding:22px;
+    margin-bottom:18px;
 }
-
-.resume-input{
-    color:white;
-
-    font-size:1rem;
+.upload-icon{
+    font-size:3.5rem;
+    color:#a855f7;
 }
-
-.image-name{
-    color:white;
-
-    font-size:1rem;
+.drag-text{
+    color:#ffffff;
+    font-size:1.3rem;
+    font-weight:700;
+    text-align:center;
 }
-
-.jd-section{
-    width:min(1100px,100%);
-
-    display:flex;
-    flex-direction:column;
-
-    gap:8px;
-
-    margin-bottom:25px;
+.or-text{
+    color:#d9e6e8;
+    font-size:0.95rem;
+    font-weight:500;
 }
-
-.jd-label{
-    color:white;
-
-    font-size:1.1rem;
-    font-weight:600;
-}
-
-.jd-textarea{
-    width:100%;
-
-    min-height:120px;
-
-    resize:none;
-
-    border:none;
-    outline:none;
-    border-radius:12px;
-
-    padding:15px;
-
-    font-size:1rem;
-
-    box-sizing:border-box;
-}
-
-.jd-note{
-    color:#f2f2f2;
-
-    font-size:0.82rem;
-
-    line-height:1.4;
-}
-
-.button-wrapper{
-    width:min(1100px,100%);
-
-    display:flex;
-    justify-content:center;
-}
-
-.analyze-btn{
-    border:none;
-    outline:none;
-
-    padding:15px 34px;
-
-    border-radius:12px;
-
-    font-size:1.1rem;
-    font-weight:600;
-
+.custom-upload{
+    background:#dfeaea;
+    color:#4c666c;
+    padding:11px 22px;
+    border-radius:10px;
+    font-weight:700;
     cursor:pointer;
-
     transition:0.2s ease;
 }
-
-.analyze-btn:hover{
+.custom-upload:hover{
     transform:scale(1.03);
 }
-
 .resume-input{
     display:none;
 }
-
-.drag-text{
-    color:#ffffff;
-
-    font-size:1.5rem;
-    font-weight:700;
-
-    letter-spacing:0.5px;
+.image-name{
+    color:#eef6f7;
+    font-size:0.92rem;
+    text-align:center;
+    word-break:break-word;
 }
-
-.or-text{
-    color:#d9e6e8;
-
+.jd-section{
+    width:min(1000px,100%);
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+    margin-bottom:18px;
+}
+.jd-label{
+    color:white;
     font-size:1rem;
-
-    font-weight:500;
-}
-
-.custom-upload{
-    background-color:#ffffff;
-
-    color:#4f6f75;
-
-    padding:12px 24px;
-
-    border-radius:10px;
-
     font-weight:600;
-
+}
+.jd-textarea{
+    width:100%;
+    min-height:105px;
+    resize:none;
+    border:none;
+    outline:none;
+    border-radius:12px;
+    padding:14px;
+    font-size:0.96rem;
+    background:#252627;
+    color:#f1f5f9;
+    border:1px solid #4a4d51;
+}
+.jd-textarea::placeholder{
+    color:#64748b;
+}
+.jd-note{
+    color:#f2f2f2;
+    font-size:0.8rem;
+    line-height:1.4;
+}
+.button-wrapper{
+    width:min(1000px,100%);
+    display:flex;
+    justify-content:center;
+}
+.analyze-btn{
+    border:none;
+    outline:none;
+    padding:13px 30px;
+    border-radius:12px;
+    font-size:1rem;
+    font-weight:600;
     cursor:pointer;
-
+    background:#a78bfa;
+    color:white;
     transition:0.2s ease;
 }
-
-.custom-upload{
-    background:#dfeaea;
-
-    color:#4c666c;
-
-    font-weight:700;
-
-    border:none;
+.analyze-btn:hover{
+    background:#4f46e5;
+    transform:scale(1.03);
 }
-
-.imageDiv{
-    background-color:rgba(255,255,255,0.05);
-
-    border:2px dashed #e8f1f2;
+@media(max-width:768px){
+    .drop-page{
+        padding:22px 16px;
+    }
+    .main-heading{
+        font-size:2.6rem;
+    }
+    .sub-heading{
+        font-size:1.05rem;
+        margin-bottom:14px;
+    }
+    .hero-text{
+        font-size:0.95rem;
+        margin-bottom:16px;
+    }
+    .imageDiv{
+        min-height:185px;
+        padding:18px;
+        gap:0.8rem;
+    }
+    .upload-icon{
+        font-size:3rem;
+    }
+    .drag-text{
+        font-size:1.1rem;
+    }
+    .jd-textarea{
+        min-height:95px;
+    }
+    .analyze-btn{
+        width:100%;
+        max-width:320px;
+    }
 }
-
-.image-name{
-    margin-top:8px;
-
-    color:#eef6f7;
-
-    font-size:0.95rem;
-}
-
-.jd-textarea {
-    background: #252627;
-    color: #f1f5f9;
-    border: 1px solid #4a4d51;
-}
-
-.jd-textarea::placeholder {
-    color: #475569;
-}
-
-.analyze-btn {
-    background: #a78bfa;
-    color: whitesmoke;
-    border: none;
-}
-
-.analyze-btn:hover {
-    background: #4f46e5;
-}
-
-.upload-icon{
-   font-size: 4rem;
-   color: #a855f7;
-   
+@media(max-width:480px){
+    .drop-page{
+        padding:18px 14px;
+    }
+    .main-heading{
+        font-size:2.2rem;
+    }
+    .sub-heading{
+        font-size:0.95rem;
+        line-height:1.4;
+    }
+    .hero-text{
+        font-size:0.88rem;
+        line-height:1.5;
+    }
+    .imageDiv{
+        min-height:170px;
+        padding:16px;
+    }
+    .upload-icon{
+        font-size:2.6rem;
+    }
+    .drag-text{
+        font-size:1rem;
+        line-height:1.4;
+    }
+    .custom-upload{
+        padding:10px 18px;
+        font-size:0.92rem;
+    }
+    .jd-label{
+        font-size:0.95rem;
+    }
+    .jd-textarea{
+        min-height:85px;
+        padding:12px;
+        font-size:0.92rem;
+    }
+    .jd-note{
+        font-size:0.74rem;
+    }
+    .analyze-btn{
+        width:100%;
+        font-size:0.95rem;
+        padding:12px 20px;
+    }
 }
