@@ -1,7 +1,5 @@
-import logo from './logo.svg';
 import './App.css';
 import Home from './Components/Home/Home';
-import { BrowserRouter } from 'react-router-dom';
 import Analysis from './Components/Analysis/Analysis';
 import { Routes,Route } from 'react-router-dom';
 import NotFound from "./Components/NotFound";
