@@ -12,11 +12,11 @@ function WithoutJDAnalysis(props){
 
     const withoutJDStats = [
   { number: a.strengths.length, label: "Strengths", sublabel: "detected", color: "var(--green)" },
-  { number: a.missingSkills.length, label: "Missing Skills", sublabel: "to add", color: "var(--red)" },
+  { number: a.recommendedSkills.length, label: "Recommended Skills", sublabel: "to add", color: "var(--red)" },
   { number: a.suggestions.length, label: "Suggestions", sublabel: "improvements", color: "var(--yellow)" },
   { number: a.bestRoles.length, label: "Best Roles", sublabel: "matched", color: "var(--blue)" },
   { number: a.formattingFeedback.length, label: "Format Tips", sublabel: "feedback", color: "var(--accent)" },
-  { number: `${a.keywordMatch}%`, label: "Keyword Match", sublabel: "technical fit", color: "var(--yellow)" },
+  { number: `${a.keywordCoverage}%`, label: "Keyword Coverage", sublabel: "technical fit", color: "var(--yellow)" },
 ]
 
     function scoreColor(score){
@@ -56,7 +56,7 @@ function WithoutJDAnalysis(props){
         
             <div className="row3">
                 <div className="missing-skills section-card">
-                    <TagSection title="Missing Skills" items={a.missingSkills} color="var(--red)" symbol="✗" />
+                    <TagSection title="Recommended Skills" items={a.recommendedSkills} color="var(--red)" symbol="★" />
                 </div>
             </div>
         
