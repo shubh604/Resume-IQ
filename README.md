@@ -19,11 +19,11 @@ ResumeIQ helps job seekers evaluate their resumes through ATS-style scoring, AI-
 
 ### Resume vs Job Description Analysis
 
-![With JD Analysis](assets/withJDAnalysis.png)
+![With JD Analysis](assets/withJdAnalysis.png)
 
 ### General Resume Analysis
 
-![Without JD Analysis](assets/withoutJDAnalysis.png)
+![Without JD Analysis](assets/withoutJdAnalysis.png)
 
 ---
 
